@@ -16,7 +16,14 @@
 #
 default: &default
   adapter: postgresql
-  encoding: unicode
+  pool: 5
+  timeout: 5000
+  username: <%= ENV['POSTGRES_USER'] || 'pgsql' %>
+  password: <%= ENV['PGPASSWORD'] || 'psql' %>
+  # host: <%= ENV.fetch("POSTGRES_HOST") { "db" }%>
+  host: localhost
+  # port: <%= ENV.fetch("POSTGRES_PORT") { 5432 }%>
+  port: 5433
   # For details on connection pooling, see Rails configuration guide
   # https://guides.rubyonrails.org/configuring.html#database-pooling
   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
@@ -79,8 +86,8 @@ test:
 # Read https://guides.rubyonrails.org/configuring.html#configuring-a-database
 # for a full overview on how database connection configuration can be specified.
 #
-production:
-  <<: *default
-  database: my_moment_finance_production
-  username: my_moment_finance
-  password: <%= ENV["MY_MOMENT_FINANCE_DATABASE_PASSWORD"] %>
+# production:
+#   <<: *default
+#   database: my_moment_finance_production
+#   username: my_moment_finance
+#   password: <%= ENV["MY_MOMENT_FINANCE_DATABASE_PASSWORD"] %>
