@@ -3,18 +3,17 @@ require 'rails_helper'
 RSpec.describe "Api::V1::Clients", type: :request do
   context 'index' do
     it 'should return status ok' do
-      get api_v1_clients_index_path
-
+      get "/api/v1/clients"
       expect(response).to have_http_status(200)
     end
   end
 
   it 'should return all client' do
-    client = Client.create(name: 'Joao', cpf: '00000', age: 32, birth_date: '1990/03/17', uf: 'PR', income: '3000')
-    other_client = Client.create(name: 'Suellen', cpf: '00020', age: 32, birth_date: '1992/07/25', uf: 'PR', income: '3000')
+    client = Client.create(name: 'Joao', cpf: '12345678911', age: 32, birth_date: '1990/03/17', uf: 'PR', income: '3000')
+    other_client = Client.create(name: 'Suellen', cpf: '12345678912', age: 32, birth_date: '1992/07/25', uf: 'PR', income: '3000')
     
     get '/api/v1/clients'
-
+  
     expect(response).to have_http_status(200)
     expect(response.body).to include client.name
     expect(response.body).to include client.cpf
