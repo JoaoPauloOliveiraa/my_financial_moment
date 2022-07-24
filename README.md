@@ -1,24 +1,114 @@
-# README
+# My financial moment
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+### Aplicação desenvolvida para cumprir os requisitos do desafio 4, proposto pela comunidade DevsFree.
 
-Things you may want to cover:
+---
+## Executando a aplicação
 
-* Ruby version
+Instale o [docker](https://docs.docker.com/get-docker/) e o [docker-compose](https://docs.docker.com/compose/install/)
 
-* System dependencies
+Instale o [git](https://git-scm.com/book/en/v2/Getting-Started-Installing-Git)
 
-* Configuration
+Para clonar o repositório abra o terminal e execute o comando abaixo:
 
-* Database creation
+```bash
+git clone https://github.com/JoaoPauloOliveiraa/my_financial_moment.git
+```
+Entre no diretório my-financial-moment executando o seguinte comando:
 
-* Database initialization
+```bash
+cd my-financial-moment
+```
 
-* How to run the test suite
+Após isso execute os seguinte comandos:
 
-* Services (job queues, cache servers, search engines, etc.)
+```bash
+cp .env.example .env
+```
 
-* Deployment instructions
+```bash
+docker-compose build
+```
 
-* ...
+Se receber alguma mensagem de erro: `ERROR: Service 'mfm.api' failed to build : Build failed`
+Execute o comando abaixo para se tornar proprietário do diretório e execute novamente o comando anterior (docker-compose build)
+
+```bash
+sudo chown -R $USER:$USER .
+```
+
+Prossiga com os próximos passos
+
+```bash
+docker-compose run --rm mfm.api bash
+```
+Esse comando irá abrir um bash dentro do container criado
+
+Então execute os seguintes comandos
+
+```bash
+bundle install
+rails db:create db:migrate db:seed
+```
+
+Após isso aperte Ctrl-D(Linux ou Windows) ou Cmd-D (MacOS)
+
+## Iniciando os containeres
+###### `AVISO: Certifique-se de que as portas 3000 e 5432 não estão ocupadas.`
+
+```bash
+docker-compose up -d
+```
+
+Após isso, você deve obter a seguinte saída no terminal:
+```bash
+Starting my-financial-moment-db ... done
+Starting my-financial-moment-api    ... done
+```
+
+Para verificar se os containeres estão em execução digite o comando:
+
+```bash
+docker-compose ps
+```
+Esses são os nomes dos containers seguidos de seus respectivos serviços, executando atualmente:
+
+```bash
+my-financial-moment-api => mfm.api (rails)
+sopha-produtos-db => db (postgres)
+```
+
+Caso algum container estiver mostrando `exit` e algum número na coluna State, veja os logs do container.
+
+Para ler os logs do container execute:
+
+```bash
+docker logs <nome-do-container>
+```
+
+Para executar a aplicação em modo debugger
+
+```bash
+docker attach my-financial-moment-api
+```
+
+Entre no browser e digite `localhost:3000`
+
+Depois desses passos você deve ver a aplicação em execução
+
+
+---
+## Executando os testes com rspec
+
+Para executar os testes da aplicação, no terminal digite
+
+```bash
+docker-compose run --rm mfm.api bash
+```
+Depois execute o seguinte comando para executar todos os testes:
+
+```bash
+rspec spec 
+```
+
+Para executar testes mais específicos, visite a página do github do [rspec](https://github.com/rspec/rspec-rails)

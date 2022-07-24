@@ -16,18 +16,11 @@
 #
 default: &default
   adapter: postgresql
-  pool: 5
   timeout: 5000
   username: <%= ENV['POSTGRES_USER'] || 'pgsql' %>
   password: <%= ENV['PGPASSWORD'] || 'psql' %>
-  # host: <%= ENV.fetch("POSTGRES_HOST") { "db" }%>
-  host: localhost
-  # port: <%= ENV.fetch("POSTGRES_PORT") { 5432 }%>
-  port: 5433
-  # For details on connection pooling, see Rails configuration guide
-  # https://guides.rubyonrails.org/configuring.html#database-pooling
-  pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
-
+  host: <%= ENV.fetch("POSTGRES_HOST") { "db" } %>
+  port: <%= ENV.fetch("POSTGRES_PORT") { 5432 } %>
 development:
   <<: *default
   database: my_moment_finance_development

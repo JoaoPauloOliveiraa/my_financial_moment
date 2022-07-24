@@ -1,0 +1,23 @@
+version: "3.9"
+
+services:
+  db:
+    container_name: my-financial-moment-db
+    image: postgres
+    environment:
+      POSTGRES_USER: pgsql
+      POSTGRES_PASSWORD: psql
+    volumes:
+      - ./tmp/db:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+  mfm.api:
+    build: .
+    container_name: my-financial-moment-api
+    ports:
+      - "3000:3000"
+    command: sh -c "rm -f tmp/pids/server.pid && bundle exec rails s -p 3000 -b '0.0.0.0'"
+    depends_on:
+      - db
+    volumes:
+      - .:/my-financial-moment-api
