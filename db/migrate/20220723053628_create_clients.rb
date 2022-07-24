@@ -6,7 +6,7 @@ class CreateClients < ActiveRecord::Migration[7.0]
       t.integer :age
       t.timestamp :birth_date, null: false
       t.string :uf, null: false
-      t.float :incom, null: false
+      t.float :income, null: false
 
       t.timestamps
     end

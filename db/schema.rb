@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_07_23_062622) do
+ActiveRecord::Schema[7.0].define(version: 2022_07_24_015321) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -24,7 +24,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_07_23_062622) do
     t.integer "age"
     t.datetime "birth_date", precision: nil, null: false
     t.string "uf", null: false
-    t.float "incom", null: false
+    t.float "income", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -32,8 +32,10 @@ ActiveRecord::Schema[7.0].define(version: 2022_07_23_062622) do
   create_table "clients_loan_products", id: false, force: :cascade do |t|
     t.bigint "client_id", null: false
     t.bigint "loan_product_id", null: false
-    t.index ["client_id", "loan_product_id"], name: "index_clients_loan_products_on_client_id_and_loan_product_id"
-    t.index ["loan_product_id", "client_id"], name: "index_clients_loan_products_on_loan_product_id_and_client_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["client_id"], name: "index_clients_loan_products_on_client_id"
+    t.index ["loan_product_id"], name: "index_clients_loan_products_on_loan_product_id"
   end
 
   create_table "loan_products", force: :cascade do |t|
@@ -44,4 +46,6 @@ ActiveRecord::Schema[7.0].define(version: 2022_07_23_062622) do
     t.datetime "updated_at", null: false
   end
 
+  add_foreign_key "clients_loan_products", "clients"
+  add_foreign_key "clients_loan_products", "loan_products"
 end
