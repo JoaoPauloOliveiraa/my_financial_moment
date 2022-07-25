@@ -53,7 +53,7 @@ rails db:create db:migrate db:seed
 
 Após isso aperte Ctrl-D(Linux ou Windows) ou Cmd-D (MacOS)
 
-## Iniciando os containeres
+## Iniciando os containers
 ###### `AVISO: Certifique-se de que as portas 3000 e 5432 não estão ocupadas.`
 
 ```bash
