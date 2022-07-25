@@ -114,8 +114,21 @@ rspec spec
 Para executar testes mais específicos, visite a página do github do [rspec](https://github.com/rspec/rspec-rails)
 
 ## Documentação 
----
+
 Acesse [Documentação](https://app.swaggerhub.com/apis-docs/jpoliveiraa/MyFinancialMoment/1.0.0#/) Swagger da Api 
+
 ---
+
 Exemplo de uso via Postman:
+
+Preencha os dados dos parâmetros e clique em send
+
+![send](https://user-images.githubusercontent.com/64380907/180779419-33b81fba-5bcb-4326-8eeb-3db91436370b.png)
+
+Exemplo de retorno
+
+![response](https://user-images.githubusercontent.com/64380907/180779534-6371a974-ff39-45c2-9f43-7c3677c88f0c.png)
+
+
+
 
